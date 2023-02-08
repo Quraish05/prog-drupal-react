@@ -10,9 +10,7 @@ function isValidData(data) {
   if (data === null) {
     return false;
   }
-  if (data.data === undefined ||
-    data.data === null ||
-    data.data.length === 0 ) {
+  if (data.data === undefined || data.data === null || data.data.length === 0) {
     return false;
   }
   return true;
@@ -34,25 +32,32 @@ function isValidData(data) {
  * @param {function} updateContent
  *   useState function to update contentList.
  */
-const NodeItem = ({id, drupal_internal__nid, title, body, contentList, updateContent}) => {
+const NodeItem = ({
+  id,
+  drupal_internal__nid,
+  title,
+  body,
+  contentList,
+  updateContent,
+}) => {
   const [showAdminOptions, setShowAdminOptions] = useState(false);
 
   function handleClick(event) {
     event.preventDefault();
-    setShowAdminOptions(!showAdminOptions)
+    setShowAdminOptions(!showAdminOptions);
   }
 
   function onEditSuccess(data) {
     // Replace the edited item in the list with updated values.
-    const idx = contentList.findIndex(item => item.id === data.id);
-    console.log('index', {idx, data, content: contentList});
+    const idx = contentList.findIndex((item) => item.id === data.id);
+    console.log("index", { idx, data, content: contentList });
     contentList[idx] = data;
     updateContent([...contentList]);
   }
 
   function onDeleteSuccess(id) {
     // Remove the deleted item from the list.
-    const list = contentList.filter(item => item.id !== id);
+    const list = contentList.filter((item) => item.id !== id);
     updateContent([...list]);
   }
 
@@ -60,7 +65,7 @@ const NodeItem = ({id, drupal_internal__nid, title, body, contentList, updateCon
   if (showAdminOptions) {
     return (
       <div>
-        <hr/>
+        <hr />
         Admin options for {title}
         <NodeEdit
           id={id}
@@ -68,16 +73,10 @@ const NodeItem = ({id, drupal_internal__nid, title, body, contentList, updateCon
           body={body.value}
           onSuccess={onEditSuccess}
         />
-        <hr/>
-        <button onClick={handleClick}>
-          cancel
-        </button>
-        <NodeDelete
-          id={id}
-          title={title}
-          onSuccess={onDeleteSuccess}
-        />
-        <hr/>
+        <hr />
+        <button onClick={handleClick}>cancel</button>
+        <NodeDelete id={id} title={title} onSuccess={onDeleteSuccess} />
+        <hr />
       </div>
     );
   }
@@ -87,9 +86,7 @@ const NodeItem = ({id, drupal_internal__nid, title, body, contentList, updateCon
     <div>
       <a href={`/node/${drupal_internal__nid}`}>{title}</a>
       {" -- "}
-      <button onClick={handleClick}>
-        edit
-      </button>
+      <button onClick={handleClick}>edit</button>
     </div>
   );
 };
@@ -97,9 +94,7 @@ const NodeItem = ({id, drupal_internal__nid, title, body, contentList, updateCon
 /**
  * Component to render when there are no articles to display.
  */
-const NoData = () => (
-  <div>No articles found.</div>
-);
+const NoData = () => <div>No articles found.</div>;
 
 /**
  * Display a list of Drupal article nodes.
@@ -116,22 +111,25 @@ const NodeReadWrite = () => {
     // This should point to your local Drupal instance. Alternatively, for React
     // applications embedded in a Drupal theme or module this could also be set
     // to a relative path.
-    const API_ROOT = '/jsonapi/';
-    const url = `${API_ROOT}node/article?fields[node--article]=id,drupal_internal__nid,title,body&sort=-created&page[limit]=10`;
+    const API_ROOT = "/jsonapi/";
+    // const url = `${API_ROOT}node/food_recipes?include=field_cuisine_type&jsonapi_include=1`;
+    const url = `${API_ROOT}node/food_recipes?fields[node--food_recipes]=id,drupal_internal__nid,title,body&sort=-created&page[limit]=10`;
 
     const headers = new Headers({
-      Accept: 'application/vnd.api+json',
+      Accept: "application/vnd.api+json",
     });
 
-    fetch(url, {headers})
+    fetch(url, { headers })
       .then((response) => response.json())
       .then((data) => {
+        console.log("data", data);
+
         if (isValidData(data)) {
           // Initialize the list of content with data retrieved from Drupal.
           updateContent(data.data);
         }
       })
-      .catch(err => console.log('There was an error accessing the API', err));
+      .catch((err) => console.log("There was an error accessing the API", err));
   }, []);
 
   // Handle updates to state when a node is added.
@@ -148,7 +146,7 @@ const NodeReadWrite = () => {
 
   return (
     <div>
-      <h2>Site content</h2>
+      <h2>Site contentttta</h2>
       {content.length ? (
         <>
           <label htmlFor="filter">Type to filter:</label>
@@ -156,28 +154,34 @@ const NodeReadWrite = () => {
             type="text"
             name="filter"
             placeholder="Start typing ..."
-            onChange={(event => setFilter(event.target.value.toLowerCase()))}
+            onChange={(event) => setFilter(event.target.value.toLowerCase())}
           />
-          <hr/>
+          <hr />
           {
             // If there's a `filter` apply it to the list of nodes.
-            content.filter((item) => {
-              if (!filter) {
-                return item;
-              }
+            content
+              .filter((item) => {
+                if (!filter) {
+                  return item;
+                }
 
-              if (filter && (item.attributes.title.toLowerCase().includes(filter) || item.attributes.body.value.toLowerCase().includes(filter))) {
-                return item;
-              }
-            }).map((item) => (
-              <NodeItem
-                key={item.id}
-                id={item.id}
-                updateContent={updateContent}
-                contentList={content}
-                {...item.attributes}
-              />
-            ))
+                if (
+                  filter &&
+                  (item.attributes.title.toLowerCase().includes(filter) ||
+                    item.attributes.body.value.toLowerCase().includes(filter))
+                ) {
+                  return item;
+                }
+              })
+              .map((item) => (
+                <NodeItem
+                  key={item.id}
+                  id={item.id}
+                  updateContent={updateContent}
+                  contentList={content}
+                  {...item.attributes}
+                />
+              ))
           }
         </>
       ) : (
@@ -187,9 +191,7 @@ const NodeReadWrite = () => {
       {showNodeAdd ? (
         <>
           <h3>Add a new article</h3>
-          <NodeAdd
-            onSuccess={onNodeAddSuccess}
-          />
+          <NodeAdd onSuccess={onNodeAddSuccess} />
         </>
       ) : (
         <p>

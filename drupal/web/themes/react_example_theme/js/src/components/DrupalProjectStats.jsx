@@ -10,29 +10,30 @@ const DrupalProjectStats = ({ projectName }) => {
     const data = fetch(
       `https://www.drupal.org/api-d7/node.json?field_project_machine_name=${project}`
     )
-      .then(response => response.json())
-      .then(result => {
+      .then((response) => response.json())
+      .then((result) => {
         if (result.list[0].project_usage) {
           setUsage(result.list[0].project_usage);
         }
       })
-      .catch(error => console.log("error", error));
+      .catch((error) => console.log("error", error));
+
   }, [project]);
 
   return (
     <div>
       <div>
         Choose a project:
-        <br/>
-        <button onClick={() => setProject('drupal')}>Drupal core</button>
-        <button onClick={() => setProject('marquee')}>Marquee</button>
+        <br />
+        <button onClick={() => setProject("drupal")}>Drupal core</button>
+        <button onClick={() => setProject("marquee")}>Marquee</button>
       </div>
       <hr />
       <div className="project--name">
         Usage stats for <strong>{project}</strong> by version:
         {usage ? (
           <ul>
-            {Object.keys(usage).map(key => (
+            {Object.keys(usage).map((key) => (
               <StatsItem count={usage[key]} version={key} key={key} />
             ))}
           </ul>
@@ -48,12 +49,12 @@ const DrupalProjectStats = ({ projectName }) => {
 // props a component accepts.
 // https://reactjs.org/docs/typechecking-with-proptypes.html
 DrupalProjectStats.propTypes = {
-  projectName: PropTypes.string.required
+  projectName: PropTypes.string.required,
 };
 
 // Set a default value for any required props.
 DrupalProjectStats.defaultProps = {
-  projectName: 'drupal',
+  projectName: "drupal",
 };
 
 /**

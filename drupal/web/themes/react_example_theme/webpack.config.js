@@ -2,13 +2,15 @@ const path = require('path');
 const isDevMode = process.env.NODE_ENV !== 'production';
 
 const PROXY = 'https://react-tutorials-2.ddev.site/';
+// const PROXY = 'https://dummy/';
 const PUBLIC_PATH = '/themes/react_example_theme/js/dist_dev/';
 
 const config = {
   entry: {
     main: [
       "react-hot-loader/patch",
-      "./js/src/index.jsx"
+      "./js/src/index.jsx",
+      "./js/src/RecipeViewTeaser.jsx"
     ]
   },
   devtool: (isDevMode) ? 'source-map' : false,
