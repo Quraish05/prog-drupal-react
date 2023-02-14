@@ -39,3 +39,15 @@ export const normalFetch = (url, headers) => {
     })
     .catch((err) => console.log("There was an error accessing the API", err));
 };
+
+export const fetchPromise = async (url) => {
+  let response = await fetch(url);
+  return await response
+    .json()
+    .then((data) => {
+      console.log("data", data);
+      return data;
+    })
+    .catch((err) => console.log("There was an error accessing the API", err));
+  // return data;
+};

@@ -1,13 +1,20 @@
 
-{# {{ attach_library('classy/node') }} #}
-{# {{attach_library("react_example_theme/recipe_view_teaser")}} #}
+{%
+  set classes = [
+    'node',
+    'node--type-' ~ node.bundle|clean_class,
+    node.isPromoted() ? 'node--promoted',
+    node.isSticky() ? 'node--sticky',
+    not node.isPublished() ? 'node--unpublished',
+    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+  ]
+%}
+
+{# {{attach_library("react_example_theme/react_app")}} #}
 {{attach_library("react_example_theme/recipe_view_teaser")}}
 
-<!-- Entry point for another page level file -->
-<div id="recipe-view-teaser" class="block"></div>
-
-
 {# <article{{ attributes.addClass(classes) }}>
+
 
   {{ title_prefix }}
   {% if label and not page %}
@@ -30,6 +37,7 @@
   <div{{ content_attributes.addClass('node__content') }}>
     {{ content }}
   </div>
-</article> #}
 
+</article> #}
+<div id="recipe-full" class="block"></div>
 

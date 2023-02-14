@@ -4,13 +4,24 @@ react_app:
   js:
     js/dist/main.min.js: {minified: true}
 
-# Include development mode React app assets compiled by a JavaScript toolchain.
-# @see react_example_theme_page_attachments_alter() in
-# react_example_theme.theme.
 react_app_dev:
   version: VERSION
   js:
     js/dist_dev/main.min.js: {minified: true}
+
+recipe_view_teaser:
+  version: VERSION
+  js:
+    js/dist/recipeViewTeaser.min.js: {minified: true}
+
+# Include development mode React app assets compiled by a JavaScript toolchain.
+# @see react_example_theme_page_attachments_alter() in
+# react_example_theme.theme.
+recipe_view_teaser_dev:
+  version: VERSION
+  js:
+    js/dist_dev/recipeViewTeaser.min.js: {minified: true}
+
 
 # Include the React, ReactDOM, and Babel runtime scripts from a CDN.
 # Use this if you're not using a toolchain to bundle your custom JS code. The
@@ -31,3 +42,4 @@ react_app_simple:
     js/index.js: { attributes: { type: text/babel } }
   dependencies:
     - react_example_theme/react_external
+

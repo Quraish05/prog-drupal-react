@@ -5,7 +5,7 @@ import { hot } from "react-hot-loader/root";
 import { normalFetch } from "./utils/fetch";
 import { VIEWS_FOOD_RECIPE } from "./utils/constants";
 
-export default function RecipeViewTeaser() {
+export const RecipeViewTeaser = () => {
   const [allRecipeViewTeasers, setAllRecipeViewTeaser] = useState([]);
 
   useEffect(() => {
@@ -15,16 +15,26 @@ export default function RecipeViewTeaser() {
       console.log("allRecipeViewTeasers", res);
       setAllRecipeViewTeaser(res);
     });
+
+    console.log("RecipeViewTeaser is loading");
   }, []);
 
   return (
     <div>
+      <h1>RecipeViewTeaser</h1>
       {allRecipeViewTeasers.map((recipe) => (
-        <div>{recipe.attributes.title}</div>
+        <div>
+          <h2>{recipe.attributes.title}</h2>
+          <a
+            href={`https://react-tutorials-2.ddev.site/node/${recipe.attributes.drupal_internal__nid}`}
+          >
+            Read more
+          </a>
+        </div>
       ))}
     </div>
   );
-}
+};
 
 ReactDOM.render(
   <RecipeViewTeaser />,

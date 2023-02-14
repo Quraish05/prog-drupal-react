@@ -15,6 +15,11 @@ function react_example_theme_page_attachments_alter(array &$attachments)
     $index = array_search('react_example_theme/react_app', $attachments['#attached']['library']);
     $attachments['#attached']['library'][$index] = 'react_example_theme/react_app_dev';
   }
+
+  if (in_array('react_example_theme/recipe_view_teaser', $attachments['#attached']['library']) && file_exists(__DIR__ . '/js/dist_dev')) {
+    $index = array_search('react_example_theme/recipe_view_teaser', $attachments['#attached']['library']);
+    $attachments['#attached']['library'][$index] = 'react_example_theme/recipe_view_teaser_dev';
+  }
 }
 
 
