@@ -4,23 +4,18 @@ import { hot } from "react-hot-loader/root";
 import LoaderProvider, {
   useLoader,
   useLoaderUpdate,
-} from "./context/LoaderContext";
-import RecipeFull from "./Recipe/RecipeFull";
+} from "../context/LoaderContext";
+import RecipeFull from "./RecipeFull";
 
-/* Import Components */
-/* const Main = hot(() => <div>
-</div>); */
-
-export default function Main() {
+export default function Recipe() {
   const loader = useLoader();
   const updateLoader = useLoaderUpdate();
 
   return (
     <LoaderProvider>
-      {/* <RecipeFull /> */}
-      <div>Index</div>
+      <RecipeFull />
     </LoaderProvider>
   );
 }
 
-ReactDOM.render(<Main />, document.getElementById("react-app"));
+ReactDOM.render(<Recipe />, document.getElementById("recipe-full"));

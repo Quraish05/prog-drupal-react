@@ -4,10 +4,12 @@ react_app:
   js:
     js/dist/main.min.js: {minified: true}
 
+
 react_app_dev:
   version: VERSION
   js:
     js/dist_dev/main.min.js: {minified: true}
+
 
 recipe_view_teaser:
   version: VERSION

@@ -4,18 +4,21 @@ const isDevMode = process.env.NODE_ENV !== "production";
 const PROXY = "https://react-tutorials-2.ddev.site/";
 // const PROXY = 'https://dummy/';
 const PUBLIC_PATH = "/themes/react_example_theme/js/dist_dev/";
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const config = {
   entry: {
     main: [
       "react-hot-loader/patch",
       "./js/src/index.jsx",
-      "./js/src/RecipeFull.jsx"
+      "./js/src/Recipe/index.jsx",
     ],
 
     recipeViewTeaser: [
       "react-hot-loader/patch",
       "./js/src/RecipeViewTeaser.jsx",
+      // "./scss/base.scss",
+
     ],
   },
   devtool: isDevMode ? "source-map" : false,
@@ -28,7 +31,7 @@ const config = {
     publicPath: PUBLIC_PATH,
   },
   resolve: {
-    extensions: [".js", ".jsx"],
+    extensions: [".js", ".jsx", ".scss"],
     alias: {
       "react-dom": "@hot-loader/react-dom",
     },
@@ -47,6 +50,15 @@ const config = {
           cacheDirectory: true,
           plugins: ["react-hot-loader/babel"],
         },
+      },
+      {
+        // Preprocess our own .css files
+        // This is the place to add your own loaders (e.g. sass/less etc.)
+        // for a list of loaders, see https://webpack.js.org/loaders/#styling
+        test: /\.s?css$/,
+        exclude: /node_modules/,
+        use: ["style-loader", "css-loader", "sass-loader"],
+        include: path.join(__dirname, "scss"),
       },
     ],
   },
@@ -74,6 +86,14 @@ const config = {
       },
     },
   },
+
+  plugins: [
+    ///...
+    new MiniCssExtractPlugin({
+      filename: isDevMode ? "[name].css" : "[name].[hash].css",
+      chunkFilename: isDevMode ? "[id].css" : "[id].[hash].css",
+    }),
+  ],
 };
 
 module.exports = config;
