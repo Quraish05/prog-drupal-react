@@ -7,3 +7,4 @@ base theme: bartik
 libraries:
   - react_example_theme/react_app
   - react_example_theme/recipe_view_teaser
+  - react_example_theme/site_footer

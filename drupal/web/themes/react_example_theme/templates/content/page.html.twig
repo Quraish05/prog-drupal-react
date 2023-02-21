@@ -5,6 +5,8 @@
  */
 #}
 
+{{attach_library("react_example_theme/site_footer")}}
+
 <div id="page-wrapper">
 	<div id="page">
 		<header id="header" class="header" role="banner">
@@ -69,9 +71,13 @@
 			</div>
 		{% endif %}
 		<footer class="site-footer">
+      {{kpr(page)}}
 			<div class="layout-container">
-				{% if page.footer_first or page.footer_second or page.footer_third or page.footer_fourth %}
+				{% if page.footer_first or page.footer_second or page.footer_third or page.footer_fourth or page.footer.sitefooter %}
 					<div class="site-footer__top clearfix">
+
+            <div id="site-react-footer" class="block"></div>
+						{{ page.footer.sitefooter }}
 						{{ page.footer_first }}
 						{{ page.footer_second }}
 						{{ page.footer_third }}

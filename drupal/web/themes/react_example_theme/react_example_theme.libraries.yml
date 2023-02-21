@@ -25,6 +25,18 @@ recipe_view_teaser_dev:
     js/dist_dev/recipeViewTeaser.min.js: {minified: true}
 
 
+site_footer:
+  version: VERSION
+  js:
+    js/dist/footer.min.js: {minified: true}
+
+site_footer_dev:
+  version: VERSION
+  js:
+    js/dist_dev/footer.min.js: {minified: true}
+
+
+
 # Include the React, ReactDOM, and Babel runtime scripts from a CDN.
 # Use this if you're not using a toolchain to bundle your custom JS code. The
 # best way is to include this as a dependency of another library.

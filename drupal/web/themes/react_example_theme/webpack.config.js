@@ -12,14 +12,15 @@ const config = {
       "react-hot-loader/patch",
       "./js/src/index.jsx",
       "./js/src/Recipe/index.jsx",
+      "./scss/base.scss",
     ],
 
     recipeViewTeaser: [
       "react-hot-loader/patch",
       "./js/src/RecipeViewTeaser.jsx",
-      // "./scss/base.scss",
-
     ],
+
+    siteFooter: ["react-hot-loader/patch", "./js/src/Footer/Footer.js"],
   },
   devtool: isDevMode ? "source-map" : false,
   mode: isDevMode ? "development" : "production",
