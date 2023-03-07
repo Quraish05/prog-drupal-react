@@ -71,17 +71,17 @@
 			</div>
 		{% endif %}
 		<footer class="site-footer">
-      {{kpr(page)}}
+      {# {{kpr(page)}} #}
 			<div class="layout-container">
 				{% if page.footer_first or page.footer_second or page.footer_third or page.footer_fourth or page.footer.sitefooter %}
 					<div class="site-footer__top clearfix">
 
             <div id="site-react-footer" class="block"></div>
-						{{ page.footer.sitefooter }}
+						{# {{ page.footer.sitefooter }}
 						{{ page.footer_first }}
 						{{ page.footer_second }}
 						{{ page.footer_third }}
-						{{ page.footer_fourth }}
+						{{ page.footer_fourth }} #}
 					</div>
 				{% endif %}
 				{% if page.footer_fifth %}

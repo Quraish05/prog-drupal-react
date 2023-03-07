@@ -23,7 +23,7 @@ export const RecipeViewTeaser = () => {
     <div>
       <h1>RecipeViewTeaser</h1>
       {allRecipeViewTeasers.map((recipe) => (
-        <div>
+        <div key={recipe.id}>
           <h2>{recipe.attributes.title}</h2>
           <a
             href={`https://react-tutorials-2.ddev.site/node/${recipe.attributes.drupal_internal__nid}`}

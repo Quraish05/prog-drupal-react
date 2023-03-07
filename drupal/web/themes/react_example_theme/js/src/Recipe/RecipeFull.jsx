@@ -39,10 +39,7 @@ export default function RecipeFull() {
     <>
       <LoaderProvider>
         <>
-          <button onClick={() => toggleLoader(true)}>Click</button>
-
           <div>
-            <h1>RecipeFull</h1>
             <h4>{thisRecipe.field_recipe_subtitle?.value}</h4>
             <div>
               {thisRecipe.field_cuisine_type?.map((c) => (

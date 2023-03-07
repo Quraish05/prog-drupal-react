@@ -20,7 +20,11 @@ const config = {
       "./js/src/RecipeViewTeaser.jsx",
     ],
 
-    siteFooter: ["react-hot-loader/patch", "./js/src/Footer/Footer.js"],
+    siteFooter: [
+      "react-hot-loader/patch",
+      "./js/src/Footer/Footer.jsx",
+      "./scss/footer.scss",
+    ],
   },
   devtool: isDevMode ? "source-map" : false,
   mode: isDevMode ? "development" : "production",

@@ -2,19 +2,17 @@
 react_app:
   version: VERSION
   js:
-    js/dist/main.min.js: {minified: true}
-
+    js/dist/main.min.js: { attributes: { defer: true } }
 
 react_app_dev:
   version: VERSION
   js:
-    js/dist_dev/main.min.js: {minified: true}
-
+    js/dist_dev/main.min.js: { attributes: { defer: true } }
 
 recipe_view_teaser:
   version: VERSION
   js:
-    js/dist/recipeViewTeaser.min.js: {minified: true}
+    js/dist/recipeViewTeaser.min.js: { attributes: { defer: true } }
 
 # Include development mode React app assets compiled by a JavaScript toolchain.
 # @see react_example_theme_page_attachments_alter() in
@@ -22,20 +20,17 @@ recipe_view_teaser:
 recipe_view_teaser_dev:
   version: VERSION
   js:
-    js/dist_dev/recipeViewTeaser.min.js: {minified: true}
-
+    js/dist_dev/recipeViewTeaser.min.js: { attributes: { defer: true } }
 
 site_footer:
   version: VERSION
   js:
-    js/dist/footer.min.js: {minified: true}
+    js/dist/siteFooter.min.js: { attributes: { defer: true } }
 
 site_footer_dev:
   version: VERSION
   js:
-    js/dist_dev/footer.min.js: {minified: true}
-
-
+    js/dist_dev/siteFooter.min.js: { attributes: { defer: true } }
 
 # Include the React, ReactDOM, and Babel runtime scripts from a CDN.
 # Use this if you're not using a toolchain to bundle your custom JS code. The
@@ -44,9 +39,12 @@ react_external:
   version: 16.x
   header: true
   js:
-    https://unpkg.com/react@16/umd/react.production.min.js: { external: true, minified: true }
-    https://unpkg.com/react-dom@16/umd/react-dom.production.min.js: { external: true, minified: true }
-    https://unpkg.com/babel-standalone@6/babel.min.js: { external: true, minified: true }
+    https://unpkg.com/react@16/umd/react.production.min.js:
+      { external: true, minified: true }
+    https://unpkg.com/react-dom@16/umd/react-dom.production.min.js:
+      { external: true, minified: true }
+    https://unpkg.com/babel-standalone@6/babel.min.js:
+      { external: true, minified: true }
 
 # Include a React/JavaScript application without using a JavaScript toolchain.
 react_app_simple:
@@ -56,4 +54,3 @@ react_app_simple:
     js/index.js: { attributes: { type: text/babel } }
   dependencies:
     - react_example_theme/react_external
-

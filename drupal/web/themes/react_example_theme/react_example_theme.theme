@@ -20,6 +20,11 @@ function react_example_theme_page_attachments_alter(array &$attachments)
     $index = array_search('react_example_theme/recipe_view_teaser', $attachments['#attached']['library']);
     $attachments['#attached']['library'][$index] = 'react_example_theme/recipe_view_teaser_dev';
   }
+
+  if (in_array('react_example_theme/site_footer', $attachments['#attached']['library']) && file_exists(__DIR__ . '/js/dist_dev')) {
+    $index = array_search('react_example_theme/site_footer', $attachments['#attached']['library']);
+    $attachments['#attached']['library'][$index] = 'react_example_theme/site_footer_dev';
+  }
 }
 
 
@@ -28,10 +33,19 @@ function react_example_theme_theme_suggestions_page_alter(array &$suggestions, a
   dump(\Drupal::routeMatch()->getParameter('page'));
   $suggestions[] = 'page__hello__';
 
-
   if ($page = \Drupal::routeMatch()->getParameter('page')) {
-    dump($suggestions);
-
     $suggestions[] = 'page__hello__' . $page->bundle();
   }
+}
+
+
+function react_example_theme_preprocess_page(&$variables)
+{
+  dump($variables);
+  $variables['title'] = $variables['title'] + '[you are the author]';
+  dump($variables['title']);
+
+  $variables['new_variable'] = TRUE;
+  dump($variables['new_variable']);
+  dump($variables);
 }
